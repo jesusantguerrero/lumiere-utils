@@ -1,0 +1,16 @@
+{
+  "name": "lumiere-utils",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "main": "src/index.js",
+  "devDependencies": {
+    "vue": "^3.2.6",
+    "@vitejs/plugin-vue": "^1.6.0",
+    "@vue/compiler-sfc": "^3.2.6",
+    "vite": "^2.5.2"
+  }
+}

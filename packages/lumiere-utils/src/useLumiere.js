@@ -1,6 +1,6 @@
 import { inject } from "vue"
 
-export const useLumiere = (provider) => {
+export const useLumiere = () => {
     const notifications = inject('notificiations', []);
     const settings = inject('settings', {});
     

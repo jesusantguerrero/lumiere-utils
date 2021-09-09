@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 
 // firebase state
-export const TeamState = reactive({
+export const AuthState = reactive({
     user: null,
     uid: null,
     settings: {},
@@ -20,7 +20,6 @@ export const useAuth = (provider) => {
     }
 
     const initAuth = (authenticatedCallback) => {
-      
         AuthState.provider?.onAuthStateChanged((user, session) => {
             const authenticatedUser = session?.user || user;
             AuthState.settings = {};
@@ -36,7 +35,9 @@ export const useAuth = (provider) => {
     };
     
     const isAuthenticated = async () => {
-        await new Promise(resolve => initAuth(resolve));
+        if (!AuthState.user.email) {
+            await new Promise(resolve => initAuth(resolve));
+        }
         return AuthState.user?.email;
     }
     

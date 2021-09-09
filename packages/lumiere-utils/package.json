@@ -8,11 +8,47 @@
   },
   "main": "src/index.js",
   "peerDependencies": {
-    "@supabase/supabase-js": "^1.22.4"
+    "@supabase/supabase-js": "^1.22.0",
+    "firebase": "^9.0.0"
   },
+  "peerDependenciesMeta": {
+    "@supabase/supabase-js": {
+      "optional": true
+    },
+    "firebase": {
+      "optional": true
+    }
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    },
+    "./*": "./*",
+    "./useAuth": {
+      "import": "./src/useAuth.js",
+      "require": "./src/useAuth.js"
+    },
+    "./useLumiere": {
+      "import": "./src/useLumiere.js",
+      "require": "./src/useLumiere.js"
+    },
+    "./useFirebase": {
+      "import": "./src/providers/firebase/useFirebase.js",
+      "require": "./src/providers/firebase/useFirebase.js"
+    },
+    "./useSupabase": {
+      "import": "./src/providers/supabase/useSupabase.js",
+      "require": "./src/providers/supabase/useSupabase.js"
+    }
+  },
+  "module": "./src/index.mjs",
+  "sideEffects": false,
   "devDependencies": {
+    "@supabase/supabase-js": "^1.22.4",
     "@vitejs/plugin-vue": "^1.6.0",
     "@vue/compiler-sfc": "^3.2.6",
+    "firebase": "^9.0.1",
     "vite": "^2.5.2",
     "vue": "^3.2.6"
   }

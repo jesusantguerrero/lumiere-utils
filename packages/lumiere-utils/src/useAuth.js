@@ -35,7 +35,7 @@ export const useAuth = (provider) => {
     };
     
     const isAuthenticated = async () => {
-        if (!AuthState.user.email) {
+        if (!AuthState.user?.email) {
             await new Promise(resolve => initAuth(resolve));
         }
         return AuthState.user?.email;

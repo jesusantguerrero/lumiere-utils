@@ -6,6 +6,13 @@
     "build": "vite build",
     "serve": "vite preview"
   },
+  "keywords": [
+    "vue",
+    "utils",
+    "auth",
+    "firebase",
+    "supabase"
+  ],
   "main": "src/index.js",
   "peerDependencies": {
     "@supabase/supabase-js": "^1.22.0",

@@ -16,13 +16,17 @@
   "main": "src/index.js",
   "peerDependencies": {
     "@supabase/supabase-js": "^1.22.0",
-    "firebase": "^9.0.0"
+    "firebase": "^9.0.0",
+    "moralis": "0.0.178"
   },
   "peerDependenciesMeta": {
     "@supabase/supabase-js": {
       "optional": true
     },
     "firebase": {
+      "optional": true
+    },
+    "moralis": {
       "optional": true
     }
   },
@@ -47,6 +51,10 @@
     "./useSupabase": {
       "import": "./src/providers/supabase/useSupabase.js",
       "require": "./src/providers/supabase/useSupabase.js"
+    },
+    "./useMoralis": {
+      "import": "./src/providers/moralis/useMoralis.js",
+      "require": "./src/providers/moralis/useMoralis.js"
     }
   },
   "module": "./src/index.mjs",
@@ -55,6 +63,7 @@
     "@supabase/supabase-js": "^1.22.4",
     "@vitejs/plugin-vue": "^1.6.0",
     "@vue/compiler-sfc": "^3.2.6",
+    "moralis": "0.0.178",
     "firebase": "^9.0.1",
     "vite": "^2.5.2",
     "vue": "^3.2.6"

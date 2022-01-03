@@ -55,6 +55,10 @@
     "./useMoralis": {
       "import": "./src/providers/moralis/useMoralis.js",
       "require": "./src/providers/moralis/useMoralis.js"
+    },
+    "./useMetamask": {
+      "import": "./src/providers/moralis/useMetamask.js",
+      "require": "./src/providers/moralis/useMetamask.js"
     }
   },
   "module": "./src/index.mjs",

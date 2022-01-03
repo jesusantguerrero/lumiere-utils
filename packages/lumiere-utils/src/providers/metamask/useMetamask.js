@@ -1,48 +1,66 @@
 export function useMetamask(AuthState, config) {
+  window.Web3 = Web3;
+  Moralis.initialize(config.MORALIS_API_KEY);
+  Moralis.serverURL = config.MORALIS_SERVER_URL  
 
-  const logout = async (callback) => {
-    const { data, error } = await supabase.auth.signOut();
-    if (error) {
-      throw new Error(error);
+  const login = async () => {
+    const currentChainId = await window.ethereum.get_chain_id();
+    if (!window.ethereum || currentChainId !== config.CHAIN_ID) {
+      throw new Error("Wrong chain id");
+    }
+    const accounts = await ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    const user = {
+      account:  accounts[0],
     }
 
-    AuthState.user = {};
+    AuthState.user = user;
+    return user;
+  };
+
+  const logout = async (callback) => {
+    await Moralis.User?.logOut();
+    AuthState.account = "";
+    AppState.user = Moralis.User.current();
+
     setTimeout(() => {
       callback && callback();
     })
-    return data;
-  };
-
-  const register = async (email, password) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    return data;
-  };
-
-  const login = async () => {
-    return await window.ethereum.request({ method: 'eth_requestAccounts' });
-    return data;
-  };
-
-  const initAuth = async() => {
-    if (typeof window.ethereum !== 'undefined') {
-      console.log('MetaMask is installed!');
-    }
+    return AppState.user;
   }
 
-  const isAuthenticated = () => {
-    return supabaseState.user.id ? true : false;
+  const initAuth = async(authenticatedCallback) => {
+    AuthState.user = Moralis.Web3.getUser();
+    console.log(AuthState.user);
+    AuthState.onLoaded();
+    authenticatedCallback && authenticatedCallback(AuthState.user);
+  };
+
+  const isAuthenticated = async () => {
+    await initAuth();
+    return AuthState.user;
+  }
+
+  const onAuthStateChanged = async (callback) => {
+    Moralis.EventEmitter.on("user:login", (user) => {
+      AuthState.user = user;
+      AuthState.onLoaded();
+      callback && callback(user);
+    });
   };
 
   return {
     logout,
     login,
-    register,
+    register: login,
     isAuthenticated,
-    onAuthStateChanged: (callback) => supabase.auth.onAuthStateChange(callback),
-    getUser: () => supabase.auth.user(),
+    onAuthStateChanged: (callback) => onAuthStateChanged.bind(null, callback),
+    getUser: () => Moralis.user && Moralis.User.current(),
+
+    Notifications: {
+      
+    }
   };
 }

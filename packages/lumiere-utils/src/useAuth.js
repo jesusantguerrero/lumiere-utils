@@ -7,10 +7,16 @@ export const AuthState = reactive({
     settings: {},
     provider: null,
     onLoaded: () => {},
+    isLoaded: false,
 })
 
 
+export const useAuthState = () => {
+    return inject('AuthState', AuthState)
+}
+
 export const useAuth = (provider) => {
+    const isLoaded = ref(false);
     if (provider) {
         AuthState.provider = provider
     }
@@ -26,11 +32,13 @@ export const useAuth = (provider) => {
             AuthState.user = typeof authenticatedUser !== 'string' ? authenticatedUser : {};
             AuthState.onLoaded()
             authenticatedCallback && authenticatedCallback(authenticatedUser || AuthState.user);
+            AuthState.isLoaded = true;
         });
         
         if (AuthState.provider?.getUser) {
             AuthState.user = AuthState.provider.getUser();
             authenticatedCallback && authenticatedCallback(AuthState.user);
+            AuthState.isLoaded = true;
         }
     };
     
@@ -40,18 +48,18 @@ export const useAuth = (provider) => {
         }
         return AuthState.user?.email;
     }
+
+    const {isLoaded, provider: { register, login, logout, loginWithProvider } = {}} = toRefs(AuthState);
     
     return {
+        useAuthState,
         isAuthenticated,
         initAuth,
         setLoaded,
-        register: AuthState.provider?.register,
-        login: AuthState.provider?.login,
-        logout: AuthState.provider?.logout,
-        loginWithProvider: AuthState.provider?.loginWithProvider,
+        isLoaded,
+        register,
+        login,
+        logout,
+        loginWithProvider,
     }
-}
-
-export const useAuthState = () => {
-    return inject('AuthState', AuthState)
 }

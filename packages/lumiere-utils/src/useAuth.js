@@ -16,7 +16,6 @@ export const useAuthState = () => {
 }
 
 export const useAuth = (provider) => {
-    const isLoaded = ref(false);
     if (provider) {
         AuthState.provider = provider
     }

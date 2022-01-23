@@ -1,11 +1,10 @@
 {
   "name": "lumiere-utils",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "prepublish": "npm run build"
+    "serve": "vite preview"
   },
   "keywords": [
     "vue",

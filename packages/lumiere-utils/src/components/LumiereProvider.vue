@@ -19,14 +19,17 @@ const props = defineProps({
         required: true
     },
 });
-
 const { provider, config } = toRefs(props);
-const providerInstance = provider.value(AuthState, config.value);
-const { initAuth } = useAuth(providerInstance);
+const globalProvider = inject('globalProvider', null);
+const providerInstance = globalProvider || provider.value(AuthState, config.value);
+const authInstance = inject('globalState', AuthState);
 
-initAuth();
+if (!globalProvider) {
+    const { initAuth } = useAuth(providerInstance);    
+    initAuth();
+}
 // Initialize the auth state 
-watch(() => AuthState.user, (user, oldUser) => {
+watch(() => authInstance.user, (user, oldUser) => {
   nextTick(() => {
     if (oldUser) {
       const route = useRoute();
@@ -58,7 +61,7 @@ watchEffect(async () => {
     }
 })
 
-provide('AuthState', AuthState);
+provide('AuthState', authInstance);
 provide('notifications', notifications);
 provide('updateNotification', updateNotification);
 </script>

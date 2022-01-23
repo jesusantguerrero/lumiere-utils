@@ -1,4 +1,4 @@
-import { inject, reactive } from "vue";
+import { inject, reactive, toRefs } from "vue";
 
 // firebase state
 export const AuthState = reactive({
@@ -32,9 +32,11 @@ export const useAuth = (provider) => {
             AuthState.onLoaded()
             authenticatedCallback && authenticatedCallback(authenticatedUser || AuthState.user);
             AuthState.isLoaded = true;
+            console.log("Aqui esta la verdera vaina")
         });
         
         if (AuthState.provider?.getUser) {
+            console.log("Aqui esta la verdera vaina")
             AuthState.user = AuthState.provider.getUser();
             authenticatedCallback && authenticatedCallback(AuthState.user);
             AuthState.isLoaded = true;

@@ -1,14 +1,19 @@
-import { reactive } from "vue";
+import { inject, reactive, toRefs } from "vue";
 
 // firebase state
-export const TeamState = reactive({
+export const AuthState = reactive({
     user: null,
     uid: null,
     settings: {},
     provider: null,
     onLoaded: () => {},
+    isLoaded: false,
 })
 
+
+export const useAuthState = () => {
+    return inject('AuthState', AuthState)
+}
 
 export const useAuth = (provider) => {
     if (provider) {
@@ -20,32 +25,42 @@ export const useAuth = (provider) => {
     }
 
     const initAuth = (authenticatedCallback) => {
-      
         AuthState.provider?.onAuthStateChanged((user, session) => {
             const authenticatedUser = session?.user || user;
             AuthState.settings = {};
             AuthState.user = typeof authenticatedUser !== 'string' ? authenticatedUser : {};
             AuthState.onLoaded()
             authenticatedCallback && authenticatedCallback(authenticatedUser || AuthState.user);
+            AuthState.isLoaded = true;
+            console.log("Aqui esta la verdera vaina")
         });
         
         if (AuthState.provider?.getUser) {
+            console.log("Aqui esta la verdera vaina")
             AuthState.user = AuthState.provider.getUser();
             authenticatedCallback && authenticatedCallback(AuthState.user);
+            AuthState.isLoaded = true;
         }
     };
     
     const isAuthenticated = async () => {
-        await new Promise(resolve => initAuth(resolve));
+        if (!AuthState.user?.email) {
+            await new Promise(resolve => initAuth(resolve));
+        }
         return AuthState.user?.email;
     }
+
+    const {isLoaded, provider: { register, login, logout, loginWithProvider } = {}} = toRefs(AuthState);
     
     return {
+        useAuthState,
         isAuthenticated,
         initAuth,
-        register: AuthState.provider?.register,
-        login: AuthState.provider?.login,
-        logout: AuthState.provider?.logout,
-        loginWithProvider: AuthState.provider?.loginWithProvider,
+        setLoaded,
+        isLoaded,
+        register,
+        login,
+        logout,
+        loginWithProvider,
     }
 }

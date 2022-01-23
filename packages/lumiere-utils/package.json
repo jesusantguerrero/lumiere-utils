@@ -1,19 +1,76 @@
 {
   "name": "lumiere-utils",
-  "version": "0.0.0",
+  "version": "0.3.4",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
-  "main": "src/index.js",
+  "keywords": [
+    "vue",
+    "utils",
+    "auth",
+    "firebase",
+    "supabase"
+  ],
+  "main": "dist/lumiere-utils.mjs",
   "peerDependencies": {
-    "@supabase/supabase-js": "^1.22.4"
+    "@supabase/supabase-js": "^1.22.0",
+    "firebase": "^9.0.0",
+    "moralis": "0.0.178"
   },
+  "peerDependenciesMeta": {
+    "@supabase/supabase-js": {
+      "optional": true
+    },
+    "firebase": {
+      "optional": true
+    },
+    "moralis": {
+      "optional": true
+    }
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    },
+    "./*": "./*",
+    "./useAuth": {
+      "import": "./src/useAuth.js",
+      "require": "./src/useAuth.js"
+    },
+    "./useLumiere": {
+      "import": "./src/useLumiere.js",
+      "require": "./src/useLumiere.js"
+    },
+    "./useFirebase": {
+      "import": "./src/providers/firebase/useFirebase.js",
+      "require": "./src/providers/firebase/useFirebase.js"
+    },
+    "./useSupabase": {
+      "import": "./src/providers/supabase/useSupabase.js",
+      "require": "./src/providers/supabase/useSupabase.js"
+    },
+    "./useMoralis": {
+      "import": "./src/providers/moralis/useMoralis.js",
+      "require": "./src/providers/moralis/useMoralis.js"
+    },
+    "./useMetamask": {
+      "import": "./src/providers/moralis/useMetamask.js",
+      "require": "./src/providers/moralis/useMetamask.js"
+    }
+  },
+  "module": "./src/index.mjs",
+  "sideEffects": false,
   "devDependencies": {
-    "vue": "^3.2.6",
+    "@supabase/supabase-js": "^1.22.4",
     "@vitejs/plugin-vue": "^1.6.0",
     "@vue/compiler-sfc": "^3.2.6",
-    "vite": "^2.5.2"
-  }
+    "firebase": "^9.0.1",
+    "moralis": "0.0.178",
+    "vite": "^2.5.2",
+    "vue": "^3.2.6"
+  },
+  "gitHead": "270a1b54b424b952e2c03c8a6f608d678b94a7a7"
 }

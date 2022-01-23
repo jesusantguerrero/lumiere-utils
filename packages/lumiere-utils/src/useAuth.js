@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { inject, reactive } from "vue";
 
 // firebase state
 export const AuthState = reactive({
@@ -44,9 +44,14 @@ export const useAuth = (provider) => {
     return {
         isAuthenticated,
         initAuth,
+        setLoaded,
         register: AuthState.provider?.register,
         login: AuthState.provider?.login,
         logout: AuthState.provider?.logout,
         loginWithProvider: AuthState.provider?.loginWithProvider,
     }
+}
+
+export const useAuthState = () => {
+    return inject('AuthState', AuthState)
 }

@@ -1,16 +1,19 @@
 export function useMetamask(AuthState, config) {
-  window.Web3 = Web3;
-  Moralis.initialize(config.MORALIS_API_KEY);
-  Moralis.serverURL = config.MORALIS_SERVER_URL  
+
+  const authenticate = async( config= {}, chainId ) => {
+    const msgParams = {
+      message: {
+        contents: config.message || 'Hi sign to my website'
+      }
+    }
+    await ethereum.request({
+      method: 'eth_signTypedData_v4',
+      params: [config.from , JSON.stringify(msgParams)]
+    })
+  }
 
   const login = async () => {
-    const currentChainId = await window.ethereum.get_chain_id();
-    if (!window.ethereum || currentChainId !== config.CHAIN_ID) {
-      throw new Error("Wrong chain id");
-    }
-    const accounts = await ethereum.request({
-      method: 'eth_requestAccounts',
-    });
+    const accounts = await authenticate({ message: "Login to the site", from: "0xE58823715C71513B90Bdff7F89483f2809D18A68" });
 
     const user = {
       account:  accounts[0],
@@ -21,9 +24,7 @@ export function useMetamask(AuthState, config) {
   };
 
   const logout = async (callback) => {
-    await Moralis.User?.logOut();
-    AuthState.account = "";
-    AppState.user = Moralis.User.current();
+    AuthState.user = {};
 
     setTimeout(() => {
       callback && callback();
@@ -44,7 +45,7 @@ export function useMetamask(AuthState, config) {
   }
 
   const onAuthStateChanged = async (callback) => {
-    Moralis.EventEmitter.on("user:login", (user) => {
+    ethereum.on("user:login", (user) => {
       AuthState.user = user;
       AuthState.onLoaded();
       callback && callback(user);
@@ -57,7 +58,7 @@ export function useMetamask(AuthState, config) {
     register: login,
     isAuthenticated,
     onAuthStateChanged: (callback) => onAuthStateChanged.bind(null, callback),
-    getUser: () => Moralis.user && Moralis.User.current(),
+    getUser: () => AuthState.user,
 
     Notifications: {
       

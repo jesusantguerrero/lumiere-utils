@@ -28,7 +28,6 @@ export function useMoralis(AuthState, config) {
 
   const initAuth = async(authenticatedCallback) => {
     AuthState.user = Moralis.Web3.getUser();
-    console.log(AuthState.user);
     AuthState.onLoaded();
     authenticatedCallback && authenticatedCallback(AuthState.user);
   };

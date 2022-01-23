@@ -11,7 +11,7 @@ export default defineConfig({
       name: 'lumiere-utils'
     },
     rollupOptions: {
-      external: ['@supabase/supabase-js', 'firebase/app']
+      external: ['@supabase/supabase-js', 'firebase/app', 'vue']
     }
   },
 })

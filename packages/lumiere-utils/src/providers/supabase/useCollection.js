@@ -33,11 +33,11 @@ export function useCollection(supabase) {
         return data;
     }
 
-    const destroy = (tableName, resourceId) => {
+    const destroy = async (tableName, resourceId) => {
         return await supabase.from(tableName).delete().eq('id', resourceId);    
     }
 
-    const getOne = (tableName, uid, defaultConfig = collectionConfig) => {
+    const getOne = async (tableName, uid, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
         const { data, error } = await supabase.from(tableName)
         .select(config.select)
@@ -47,7 +47,7 @@ export function useCollection(supabase) {
         return data?.map(config.parser);
     }
 
-    const getAll = (tableName, defaultConfig = collectionConfig) => {
+    const getAll = async (tableName, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
         const { data, error } = await supabase.from(tableName)
         .select(config.select)
@@ -59,7 +59,6 @@ export function useCollection(supabase) {
     return {
         save,
         update,
-        updateBatch,
         destroy,
         getOne,
         getAll,

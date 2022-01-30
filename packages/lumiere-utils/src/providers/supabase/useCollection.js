@@ -1,6 +1,5 @@
 import { AuthState } from "lumiere-utils/useAuth"
-
-export function useCollection(supabase) {  
+export function useCollection() {  
     const collectionConfig = {
         userField: 'user_id',
         idField: 'id',
@@ -10,6 +9,7 @@ export function useCollection(supabase) {
     
     const save = async (tableName, rows, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
+        const supabase = AuthState.provider;
         const { data, error } = await supabase
         .from(tableName)
         .insert(rows.map(row => ({
@@ -24,6 +24,7 @@ export function useCollection(supabase) {
 
     const update = async (tableName, row, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
+        const supabase = AuthState.provider;
         const { data, error } = await supabase
         .from(tableName)
         .update(row, { returning: "representation", ...config })
@@ -34,11 +35,13 @@ export function useCollection(supabase) {
     }
 
     const destroy = async (tableName, resourceId) => {
+        const supabase = AuthState.provider;
         return await supabase.from(tableName).delete().eq('id', resourceId);    
     }
 
     const getOne = async (tableName, uid, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
+        const supabase = AuthState.provider;
         const { data, error } = await supabase.from(tableName)
         .select(config.select)
         .eq(config.idField, uid)
@@ -49,6 +52,7 @@ export function useCollection(supabase) {
 
     const getAll = async (tableName, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
+        const supabase = AuthState.provider;
         const { data, error } = await supabase.from(tableName)
         .select(config.select)
         .eq(config.userField, AuthState.user.id);

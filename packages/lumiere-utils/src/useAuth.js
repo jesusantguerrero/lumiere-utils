@@ -5,9 +5,9 @@ export const AuthState = reactive({
     user: null,
     uid: null,
     settings: {},
-    provider: null,
     onLoaded: () => {},
     isLoaded: false,
+    provider: null,
 })
 
 
@@ -62,5 +62,6 @@ export const useAuth = (provider) => {
         login,
         logout,
         loginWithProvider,
+        provider
     }
 }

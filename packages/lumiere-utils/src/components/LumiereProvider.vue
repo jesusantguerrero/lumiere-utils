@@ -6,6 +6,7 @@
 
 <script setup>
 import { inject, nextTick, provide, ref, toRefs, watch, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import { AuthState, useAuth } from "../useAuth";
 import { avoidLoginRoutes } from "../avoidLoginRoutes";
 

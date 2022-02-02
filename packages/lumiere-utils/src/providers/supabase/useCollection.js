@@ -1,4 +1,4 @@
-import { AuthState } from "lumiere-utils/useAuth"
+import { AuthState } from "../../useAuth";
 export function useCollection() {  
     const collectionConfig = {
         userField: 'user_id',
@@ -6,10 +6,14 @@ export function useCollection() {
         select: '*',
         parser: row => row
     }
+
+    const getProvider = () => {
+        return AuthState.provider.supabase;
+    }
     
     const save = async (tableName, rows, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
-        const supabase = AuthState.provider;
+        const supabase = getProvider();
         const { data, error } = await supabase
         .from(tableName)
         .insert(rows.map(row => ({
@@ -24,7 +28,7 @@ export function useCollection() {
 
     const update = async (tableName, row, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
-        const supabase = AuthState.provider;
+        const supabase = getProvider();
         const { data, error } = await supabase
         .from(tableName)
         .update(row, { returning: "representation", ...config })
@@ -35,13 +39,13 @@ export function useCollection() {
     }
 
     const destroy = async (tableName, resourceId) => {
-        const supabase = AuthState.provider;
+        const supabase = getProvider();
         return await supabase.from(tableName).delete().eq('id', resourceId);    
     }
 
     const getOne = async (tableName, uid, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
-        const supabase = AuthState.provider;
+        const supabase = getProvider();
         const { data, error } = await supabase.from(tableName)
         .select(config.select)
         .eq(config.idField, uid)
@@ -52,7 +56,7 @@ export function useCollection() {
 
     const getAll = async (tableName, defaultConfig = collectionConfig) => {
         const config = { ...collectionConfig, ...defaultConfig };
-        const supabase = AuthState.provider;
+        const supabase = getProvider();
         const { data, error } = await supabase.from(tableName)
         .select(config.select)
         .eq(config.userField, AuthState.user.id);

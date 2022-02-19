@@ -5,12 +5,13 @@
     "lerna": "lerna",
     "lerna-publish": "lerna publish --conventional-commits --yes",
     "docs": "vitepress dev packages",
-    "docs:build": "nr update:full && vitepress build packages && nr build:redirects && esno scripts/post-docs.ts",
+    "docs:build": "vitepress build packages",
     "docs:serve": "vitepress serve packages"
   },
   "devDependencies": {
     "@antfu/ni": "^0.13.0",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "pnpm": "^6.31.0"
   },
   "dependencies": {
     "vitepress": "^0.22.2"

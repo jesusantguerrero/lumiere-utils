@@ -35,9 +35,8 @@ export function useSupabase(AuthState, config) {
   };
 
   const isAuthenticated = () => {
-    return supabaseState.user.id ? true : false;
+    return supabase.auth.user() ? true : false;
   };
-
 
   // Profile Management
   const getProfile = () => {}

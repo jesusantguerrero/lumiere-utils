@@ -5,7 +5,8 @@
 </template>
 
 <script setup>
-import { nextTick, provide, ref, toRefs, watch, watchEffect } from "vue";
+import { inject, nextTick, provide, ref, toRefs, watch, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import { AuthState, useAuth } from "../useAuth";
 import { avoidLoginRoutes } from "../avoidLoginRoutes";
 

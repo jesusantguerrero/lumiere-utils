@@ -115,7 +115,7 @@ myRouter.beforeEach(async (to, _from, next) => {
   } else {
     next();
   }
-});
+});s
 
 export default myRouter;
 ```

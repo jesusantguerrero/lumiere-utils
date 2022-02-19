@@ -1,5 +1,6 @@
 import { VPTheme } from "@vue/theme"
 import { h } from "vue"
+import Home from "./components/Home.vue"
 
 import "./styles/main.css";
 
@@ -17,5 +18,10 @@ export default {
             // 'aside-mid': () => h('div', { style: { height: '300px' }}, 'Sponsors'),
             // 'aside-bottom': () => h('div', { style: { height: '300px' }}, 'Sponsors'),
         })
+    },
+    enhanceApp({ app, router, siteData }) {
+        // app is the Vue 3 app instance from `createApp()`. router is VitePress'
+        // custom router. `siteData` is a `ref` of current site-level metadata.
+        app.component("Home", Home)
     }
 }

@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@antfu/ni": "^0.13.0",
+    "@vue/theme": "^1.0.1",
     "lerna": "^4.0.0",
     "pnpm": "^6.31.0"
   },

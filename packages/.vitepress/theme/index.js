@@ -1,6 +1,8 @@
 import { VPTheme } from "@vue/theme"
 import { h } from "vue"
 
+import "./styles/main.css";
+
 export default {
     ...VPTheme,
     Layout() {

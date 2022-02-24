@@ -48,6 +48,14 @@
       "import": "./src/providers/firebase/useFirebase.js",
       "require": "./src/providers/firebase/useFirebase.js"
     },
+    "./useFirestore": {
+      "import": "./src/providers/firebase/useFirestore.js",
+      "require": "./src/providers/firebase/useFirestore.js"
+    },
+    "./useFunctions": {
+      "import": "./src/providers/firebase/useFunctions.js",
+      "require": "./src/providers/firebase/useFunctions.js"
+    },
     "./useSupabase": {
       "import": "./src/providers/supabase/useSupabase.js",
       "require": "./src/providers/supabase/useSupabase.js"

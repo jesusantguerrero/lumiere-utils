@@ -1,6 +1,6 @@
 {
   "name": "lumiere-utils",
-  "version": "0.3.12",
+  "version": "0.4.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -47,6 +47,14 @@
     "./useFirebase": {
       "import": "./src/providers/firebase/useFirebase.js",
       "require": "./src/providers/firebase/useFirebase.js"
+    },
+    "./useFirestore": {
+      "import": "./src/providers/firebase/useFirestore.js",
+      "require": "./src/providers/firebase/useFirestore.js"
+    },
+    "./useFunctions": {
+      "import": "./src/providers/firebase/useFunctions.js",
+      "require": "./src/providers/firebase/useFunctions.js"
     },
     "./useSupabase": {
       "import": "./src/providers/supabase/useSupabase.js",

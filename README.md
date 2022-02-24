@@ -8,8 +8,10 @@ Roadmap
   - [x] firebase provider
   - [ ] eth provider
 - [x] useLumiere
- - []
-- [] utils
+ - [ ] notifications
+ - [ ] settings
+ - [ ] user
+- [ ] utils
 
 
 ### Usage
@@ -33,7 +35,7 @@ VITE_SUPABASE_URL=
 src/config/index.js
 ```
 export default {
-  appName: 'Neatlogs',
+  appName: 'Lumiere',
   home: 'dashboard',
   loginRoutes: ['auth-login', 'auth-register'],
   FIREBASE_API_KEY: import.meta.env.VITE_FIREBASE_APP_KEY,

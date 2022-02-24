@@ -1,0 +1,4 @@
+packages:
+  - 'packages/**'
+  - '!packages/guide/**'
+  - '!packages/public/**'

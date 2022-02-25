@@ -17,9 +17,7 @@
     "lerna": "^4.0.0",
     "pnpm": "^6.31.0",
     "postcss": "^8.4.6",
-    "tailwindcss": "^3.0.23"
-  },
-  "devDependencies": {
+    "tailwindcss": "^3.0.23",
     "@iconify/json": "^2.1.6",
     "unplugin-icons": "^0.13.2",
     "unplugin-vue-components": "^0.17.21",

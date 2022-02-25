@@ -1,6 +1,5 @@
 import Base from "@vue/theme/config"
 
-
 const Ecosystem = [
     { text: 'Lumiere-template', link: 'ecosystem/template' },
     { text: 'Atmosphere UI', link: 'ecosystem/atmosphere-ui' }
@@ -14,9 +13,8 @@ const config = {
     lang: 'en-US',
 
     themeConfig: {
-        logo: '/fire.png',
-        repo: 'vitepress/lumiere',
-        docsDir: 'packages',
+        repo: 'lumiere-utils',
+        docsDir: 'docs',
 
         algolia: {
             indexName: 'lumiere',
@@ -27,15 +25,17 @@ const config = {
         editLinks: false,
 
         socialLinks: [
-            { icon: 'github', link: ''}
+            { icon: 'github', link: 'https://github.com/jesusantguerrero/lumiere-utils'}
         ],
 
         nav: [
+
             { text: 'Guide', 
             items: [
-                { text: 'Guide', items: []},
-                { text: 'Links', items: []}
-            ]}
+                { text: 'Guide', link: '/guide/' },
+                { text: 'Links', link: '/guide/links' },
+            ]},
+            { text: 'Ecosystem', items: Ecosystem },
         ],
         head: [
             ['meta', { name: 'theme-color', content: '#ffffff' }],
@@ -54,6 +54,11 @@ const config = {
             ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' }],
             ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }],
         ],
+    },
+    vite: {
+        build: {
+            minify: 'terser'
+        }
     }
 }
 

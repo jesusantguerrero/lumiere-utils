@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 
-
 export const useFirebase = (AuthState, config) => {
     // setup firebase
     const firebaseConfig = {

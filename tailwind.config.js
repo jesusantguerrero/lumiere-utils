@@ -1,5 +1,5 @@
 module.exports = {
-    content: ["./packages/.vitepress/**/*.{vue,js,ts,jsx,tsx}"],
+    content: ["./docs/.vitepress/**/*.{vue,js,ts,jsx,tsx}"],
     theme: {
       extend: {},
     },

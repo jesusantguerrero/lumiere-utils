@@ -1,2 +1,2 @@
 node_modules/**
-packages/.vitepress/dist
+docs/.vitepress/dist

@@ -31,12 +31,10 @@ if (!globalProvider) {
 }
 // Initialize the auth state 
 watch(() => authInstance.user, (user, oldUser) => {
-  nextTick(() => {
-    if (oldUser) {
+    if (oldUser && !user) {
       const route = useRoute();
       avoidLoginRoutes(route, user, config.value)
-    }
-  })
+  } 
 }, { deep: true,immediate: true });
 
 // notifications

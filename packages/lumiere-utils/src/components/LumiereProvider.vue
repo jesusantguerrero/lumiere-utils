@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-import { inject, nextTick, provide, ref, toRefs, watch, watchEffect } from "vue";
-import { useRoute } from "vue-router";
+import { inject, provide, ref, toRefs, watch, watchEffect } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { AuthState, useAuth } from "../useAuth";
 import { avoidLoginRoutes } from "../avoidLoginRoutes";
 
@@ -33,7 +33,8 @@ if (!globalProvider) {
 watch(() => authInstance.user, (user, oldUser) => {
     if (oldUser && !user) {
       const route = useRoute();
-      avoidLoginRoutes(route, user, config.value)
+      const router = useRouter();
+      avoidLoginRoutes(router, route, user, config.value)
   } 
 }, { deep: true,immediate: true });
 

@@ -1,7 +1,9 @@
-export const avoidLoginRoutes = (route, isAuthenticated, config) => {
-  if (isAuthenticated && route && route.matched.some(record => config.loginRoutes.includes(record.path))) {
-    return myRouter.push({ name: config.home });
-  } else if (!isAuthenticated && route.matched && route.matched[0].meta.requiresAuth !== false) {
-    return myRouter.push({ name: config.loginRoutes[0] });
+export const avoidLoginRoutes = (router, route, isAuthenticated, config) => {
+  if (!route || !route.matched) {
+    return
+  } else if (isAuthenticated &&  route.matched.some(record => config.loginRoutes.includes(record.path))) {
+    return router.push({ name: config.home });
+  } else if (!isAuthenticated && route.matched[0].meta.requiresAuth !== false) {
+    return router.push({ name: config.loginRoutes[0] });
   }
 }

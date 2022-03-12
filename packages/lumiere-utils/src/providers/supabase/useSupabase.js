@@ -9,7 +9,7 @@ export function useSupabase(AuthState, config) {
       throw new Error(error);
     }
 
-    AuthState.user = {};
+    AuthState.user = null;
     setTimeout(() => {
       callback && callback();
     })
@@ -30,7 +30,6 @@ export function useSupabase(AuthState, config) {
     if (error) {
       throw new Error(error.message);
     }
-
     return data;
   };
 

@@ -32,11 +32,9 @@ export const useAuth = (provider) => {
             AuthState.onLoaded()
             authenticatedCallback && authenticatedCallback(authenticatedUser || AuthState.user);
             AuthState.isLoaded = true;
-            console.log("Aqui esta la verdera vaina")
         });
         
         if (AuthState.provider?.getUser) {
-            console.log("Aqui esta la verdera vaina")
             AuthState.user = AuthState.provider.getUser();
             authenticatedCallback && authenticatedCallback(AuthState.user);
             AuthState.isLoaded = true;

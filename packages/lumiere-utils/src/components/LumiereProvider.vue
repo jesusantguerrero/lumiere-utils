@@ -37,7 +37,7 @@ watch(() => authInstance.user, (user, oldUser) => {
       avoidLoginRoutes(route, user, config.value)
     }
   })
-}, { deep: true });
+}, { deep: true,immediate: true });
 
 // notifications
 const notifications = ref([])
